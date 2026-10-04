@@ -1,8 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import heroPortrait from "@/assets/hero-portrait.jpg";
-import projectCRecords from "@/assets/project-c-records.jpg";
-import projectPortfolio from "@/assets/project-portfolio.jpg";
-import projectNotes from "@/assets/project-notes.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -90,13 +86,22 @@ function Index() {
             </div>
           </div>
           <div className="mx-auto w-full max-w-md overflow-hidden rounded-[28px] bg-glass ring-1 ring-glass-ring backdrop-blur-md">
-            <img
-              src={heroPortrait}
-              alt="Himanshi Choudhary studying at her desk"
-              width={1080}
-              height={1280}
-              className="aspect-[4/5] w-full object-cover"
-            />
+            <div className="bg-foreground p-6 font-mono text-sm leading-relaxed text-background md:p-8">
+              <div className="flex gap-1.5">
+                <span className="size-2.5 rounded-full bg-background/25" />
+                <span className="size-2.5 rounded-full bg-background/25" />
+                <span className="size-2.5 rounded-full bg-background/25" />
+              </div>
+              <pre className="mt-5 overflow-x-auto whitespace-pre-wrap text-[13px]">{`#include <stdio.h>
+
+int main(void) {
+    printf("Hello, I'm Himanshi!\\n");
+    return 0;
+}`}</pre>
+              <p className="mt-5 text-xs text-background/60">
+                // first-year CSE · learning C, one program at a time
+              </p>
+            </div>
           </div>
         </section>
 
@@ -174,27 +179,69 @@ function Index() {
             <span className="font-mono text-xs text-primary">(d)</span>
             <h2 className="font-display text-4xl tracking-tight text-balance md:text-5xl">Projects</h2>
           </div>
+          <p className="mt-3 max-w-[60ch] text-sm text-muted-foreground">
+            A mix of what I'm currently learning and small project ideas — I only mark something as
+            completed once it truly is.
+          </p>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {PROJECTS.map((project) => (
-              <article
-                key={project.title}
-                className="overflow-hidden rounded-[min(1vw,20px)] bg-glass ring-1 ring-glass-ring backdrop-blur-md"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  width={1024}
-                  height={768}
-                  className="aspect-[4/3] w-full object-cover"
-                />
-                <div className="p-5">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-primary">{project.tag}</p>
-                  <h3 className="mt-1 text-base font-semibold text-foreground">{project.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground text-pretty">{project.description}</p>
+            <ProjectCard
+              status="Currently Learning"
+              title="Student Records — C"
+              description="Building my C fundamentals (arrays, functions, pointers) while planning a small console program to add and search student entries."
+            >
+              <div className="aspect-[4/3] bg-foreground p-5 font-mono text-[11px] leading-relaxed text-background/75">
+                <p className="text-background">$ gcc student_records.c -o records</p>
+                <p className="text-background">$ ./records</p>
+                <p className="mt-2">1. Add student</p>
+                <p>2. Search student</p>
+                <p>3. Exit</p>
+                <p className="mt-3 text-primary">// logic in progress</p>
+              </div>
+            </ProjectCard>
+
+            <ProjectCard
+              status="Completed"
+              title="Personal Portfolio Website"
+              description="This site — a responsive one-page portfolio I built to introduce myself, what I'm learning, and what I'm working on."
+            >
+              <div className="grid aspect-[4/3] place-items-center bg-secondary p-5">
+                <div className="w-3/4 rounded-2xl bg-glass-strong p-4 ring-1 ring-black/5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">HC · Portfolio</p>
+                  <p className="mt-2 font-display text-lg tracking-tight text-foreground">Himanshi Choudhary</p>
+                  <div className="mt-3 space-y-1.5">
+                    <div className="h-1.5 rounded-full bg-foreground/10" />
+                    <div className="h-1.5 w-2/3 rounded-full bg-foreground/10" />
+                    <div className="h-1.5 w-1/2 rounded-full bg-foreground/10" />
+                  </div>
                 </div>
-              </article>
-            ))}
+              </div>
+            </ProjectCard>
+
+            <ProjectCard
+              status="Project Idea"
+              title="Study Notes Hub"
+              description="A simple HTML/CSS page I'd like to build to keep my semester notes, to-dos and links in one place."
+            >
+              <div className="grid aspect-[4/3] place-items-center bg-secondary p-5">
+                <div className="w-3/4 rounded-2xl bg-glass-strong p-4 ring-1 ring-black/5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Semester notes</p>
+                  <ul className="mt-3 space-y-2 text-xs font-medium text-foreground">
+                    <li className="flex items-center gap-2">
+                      <span className="size-3 rounded border border-primary bg-primary" />
+                      C programming practice
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="size-3 rounded border border-foreground/20" />
+                      Web development basics
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="size-3 rounded border border-foreground/20" />
+                      AI tools exploration
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </ProjectCard>
           </div>
         </section>
 
@@ -277,6 +324,29 @@ function Index() {
   );
 }
 
+function ProjectCard({
+  status,
+  title,
+  description,
+  children,
+}: {
+  status: string;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <article className="overflow-hidden rounded-[min(1vw,20px)] bg-glass ring-1 ring-glass-ring backdrop-blur-md">
+      {children}
+      <div className="p-5">
+        <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-primary">{status}</p>
+        <h3 className="mt-1 text-base font-semibold text-foreground">{title}</h3>
+        <p className="mt-2 text-sm text-muted-foreground text-pretty">{description}</p>
+      </div>
+    </article>
+  );
+}
+
 const SKILLS = [
   {
     tag: "Core",
@@ -302,26 +372,5 @@ const SKILLS = [
     tag: "Soft",
     title: "Digital Productivity",
     description: "Organizing notes, tasks, and study material across tools.",
-  },
-];
-
-const PROJECTS = [
-  {
-    tag: "College",
-    title: "Student Records — C",
-    description: "A console program to add and search student entries using arrays and functions.",
-    image: projectCRecords,
-  },
-  {
-    tag: "Personal",
-    title: "Personal Portfolio Website",
-    description: "This site — a responsive one-page portfolio introducing who I am and what I'm learning.",
-    image: projectPortfolio,
-  },
-  {
-    tag: "Personal",
-    title: "Study Notes Hub",
-    description: "A simple HTML/CSS page to keep my semester notes and to-dos in one place.",
-    image: projectNotes,
   },
 ];
