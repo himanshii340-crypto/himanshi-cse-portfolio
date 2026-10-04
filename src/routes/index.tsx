@@ -1,24 +1,327 @@
 import { createFileRoute } from "@tanstack/react-router";
+import heroPortrait from "@/assets/hero-portrait.jpg";
+import projectCRecords from "@/assets/project-c-records.jpg";
+import projectPortfolio from "@/assets/project-portfolio.jpg";
+import projectNotes from "@/assets/project-notes.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Himanshi Choudhary — B.Tech CSE Student, JECRC University" },
+      {
+        name: "description",
+        content:
+          "Personal portfolio of Himanshi Choudhary, a first-year B.Tech Computer Science & Engineering (CSE Core) student at JECRC University, Jaipur — skills, projects and contact.",
+      },
+      { property: "og:title", content: "Himanshi Choudhary — B.Tech CSE Student, JECRC University" },
+      {
+        property: "og:description",
+        content:
+          "First-year B.Tech CSE student at JECRC University, Jaipur learning C programming, web development and AI tools.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const EMAIL = "himanshi.26bcon1972@jecrcu.edu.in";
+const GITHUB_URL = "https://github.com/himanshii340-crypto";
+const LINKEDIN_URL = "https://www.linkedin.com/in/himanshi-choudhary-b37333425";
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen font-body text-foreground">
+      <header className="sticky top-0 z-50 border-b border-white/40 bg-glass backdrop-blur-xl">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <a href="#home" className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-foreground">
+            HC · Portfolio
+          </a>
+          <div className="hidden items-center gap-7 text-sm font-medium text-muted-foreground md:flex">
+            <a href="#about" className="transition-colors hover:text-foreground">About</a>
+            <a href="#education" className="transition-colors hover:text-foreground">Education</a>
+            <a href="#skills" className="transition-colors hover:text-foreground">Skills</a>
+            <a href="#projects" className="transition-colors hover:text-foreground">Projects</a>
+            <a href="#achievements" className="transition-colors hover:text-foreground">Achievements</a>
+          </div>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground ring-1 ring-black/5 transition-colors hover:bg-primary/85"
+          >
+            Contact
+          </a>
+        </nav>
+      </header>
+
+      <main className="mx-auto max-w-6xl px-6">
+        {/* Home */}
+        <section id="home" className="grid scroll-mt-24 items-center gap-10 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24">
+          <div className="animate-rise">
+            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-primary">
+              B.Tech · CSE (Core) · JECRC University, Jaipur
+            </p>
+            <h1 className="mt-4 font-display text-6xl leading-[0.95] tracking-tight text-balance md:text-8xl">
+              Himanshi
+              <br />
+              Choudhary
+            </h1>
+            <p className="mt-6 max-w-[42ch] text-lg leading-relaxed text-muted-foreground text-pretty">
+              A first-year Computer Science student learning C programming, AI tools, and digital
+              productivity — building a foundation one project at a time.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener"
+                className="rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background ring-1 ring-black/5 transition-colors hover:bg-foreground/85"
+              >
+                GitHub
+              </a>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener"
+                className="rounded-full bg-glass-strong px-5 py-2.5 text-sm font-semibold text-foreground ring-1 ring-black/5 backdrop-blur-md transition-colors hover:bg-white"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+          <div className="mx-auto w-full max-w-md overflow-hidden rounded-[28px] bg-glass ring-1 ring-glass-ring backdrop-blur-md">
+            <img
+              src={heroPortrait}
+              alt="Himanshi Choudhary studying at her desk"
+              width={1080}
+              height={1280}
+              className="aspect-[4/5] w-full object-cover"
+            />
+          </div>
+        </section>
+
+        {/* About */}
+        <section id="about" className="scroll-mt-24 border-t border-border py-16">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-xs text-primary">(a)</span>
+            <h2 className="font-display text-4xl tracking-tight text-balance md:text-5xl">About Me</h2>
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-[1.4fr_1fr]">
+            <p className="max-w-[56ch] text-lg leading-relaxed text-foreground text-pretty">
+              I'm a first-year B.Tech CSE (Core) student at JECRC University, Jaipur. Right now I'm
+              learning the fundamentals of programming in C, exploring AI tools, and getting
+              comfortable with basic web development and digital productivity workflows. I document
+              what I learn and build small, honest projects along the way.
+            </p>
+            <div className="rounded-2xl bg-glass p-6 ring-1 ring-glass-ring backdrop-blur-md">
+              <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-primary">
+                Focus areas
+              </p>
+              <ul className="mt-4 space-y-3 text-sm font-medium text-foreground">
+                <li>C Programming fundamentals</li>
+                <li>AI tools & prompt workflows</li>
+                <li>Digital productivity & notes</li>
+                <li>Basic web development</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Education */}
+        <section id="education" className="scroll-mt-24 border-t border-border py-16">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-xs text-primary">(b)</span>
+            <h2 className="font-display text-4xl tracking-tight text-balance md:text-5xl">Education</h2>
+          </div>
+          <div className="mt-8 rounded-2xl bg-glass p-6 ring-1 ring-glass-ring backdrop-blur-md">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-lg font-semibold text-foreground">
+                B.Tech — Computer Science & Engineering (CSE Core)
+              </h3>
+              <span className="font-mono text-xs text-muted-foreground">2026 — Present</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">JECRC University, Jaipur · First year in progress</p>
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="scroll-mt-24 border-t border-border py-16">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-xs text-primary">(c)</span>
+            <h2 className="font-display text-4xl tracking-tight text-balance md:text-5xl">Skills</h2>
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SKILLS.map((skill, i) => (
+              <div
+                key={skill.title}
+                className="animate-rise rounded-2xl bg-glass p-5 ring-1 ring-glass-ring backdrop-blur-md transition-colors hover:bg-glass-strong"
+                style={{ animationDelay: `${i * 40}ms` }}
+              >
+                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-primary">{skill.tag}</p>
+                <h3 className="mt-2 text-base font-semibold text-foreground">{skill.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground text-pretty">{skill.description}</p>
+              </div>
+            ))}
+            <div className="animate-rise grid place-items-center rounded-2xl bg-glass/40 p-5 text-center ring-1 ring-black/10 backdrop-blur-md">
+              <p className="text-sm font-medium text-muted-foreground">More skills added as I learn them.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Projects */}
+        <section id="projects" className="scroll-mt-24 border-t border-border py-16">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-xs text-primary">(d)</span>
+            <h2 className="font-display text-4xl tracking-tight text-balance md:text-5xl">Projects</h2>
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {PROJECTS.map((project) => (
+              <article
+                key={project.title}
+                className="overflow-hidden rounded-[min(1vw,20px)] bg-glass ring-1 ring-glass-ring backdrop-blur-md"
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  width={1024}
+                  height={768}
+                  className="aspect-[4/3] w-full object-cover"
+                />
+                <div className="p-5">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-primary">{project.tag}</p>
+                  <h3 className="mt-1 text-base font-semibold text-foreground">{project.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground text-pretty">{project.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Certifications & Achievements */}
+        <section id="achievements" className="scroll-mt-24 border-t border-border py-16">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-xs text-primary">(e)</span>
+            <h2 className="font-display text-4xl tracking-tight text-balance md:text-5xl">
+              Certifications & Achievements
+            </h2>
+          </div>
+          <div className="mt-8 grid place-items-center rounded-2xl border border-dashed border-border bg-glass/40 p-10 text-center backdrop-blur-md">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Coming soon</p>
+              <p className="mx-auto mt-3 max-w-[48ch] text-sm leading-relaxed text-muted-foreground text-pretty">
+                I'm keeping this space for genuine certificates and achievements only — I'll add
+                each one here as I earn it.
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 font-mono text-xs text-muted-foreground">
+            More genuine certificates will be added as I complete them.
+          </p>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="scroll-mt-24 border-t border-border py-16">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-xs text-primary">(f)</span>
+            <h2 className="font-display text-4xl tracking-tight text-balance md:text-5xl">Contact</h2>
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl bg-glass p-6 ring-1 ring-glass-ring backdrop-blur-md">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Email</p>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="mt-3 block break-all text-lg font-semibold text-foreground underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
+              >
+                {EMAIL}
+              </a>
+              <p className="mt-2 text-sm text-muted-foreground">College email · JECRC University, Jaipur</p>
+            </div>
+            <div className="rounded-2xl bg-glass p-6 ring-1 ring-glass-ring backdrop-blur-md">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Find me online</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener"
+                  className="rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background ring-1 ring-black/5 transition-colors hover:bg-foreground/85"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener"
+                  className="rounded-full bg-glass-strong px-5 py-2.5 text-sm font-semibold text-foreground ring-1 ring-black/5 transition-colors hover:bg-white"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="mt-8 border-t border-border bg-glass backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-6 py-8 sm:flex-row sm:items-center">
+          <div>
+            <p className="font-display text-xl tracking-tight text-foreground">Himanshi Choudhary</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              First-year B.Tech CSE (Core) · JECRC University, Jaipur
+            </p>
+          </div>
+          <p className="font-mono text-xs text-muted-foreground">© 2026 · Built while learning</p>
+        </div>
+      </footer>
     </div>
   );
 }
+
+const SKILLS = [
+  {
+    tag: "Core",
+    title: "C Programming",
+    description: "Loops, arrays, functions, and pointers — the language I'm currently building on.",
+  },
+  {
+    tag: "Core",
+    title: "Basic Web Development",
+    description: "HTML and CSS basics, plus simple responsive layouts I'm still practicing.",
+  },
+  {
+    tag: "Core",
+    title: "AI Tools",
+    description: "Using AI assistants and prompt workflows to learn faster and draft notes.",
+  },
+  {
+    tag: "Soft",
+    title: "Communication",
+    description: "Explaining ideas clearly in class presentations and group work.",
+  },
+  {
+    tag: "Soft",
+    title: "Digital Productivity",
+    description: "Organizing notes, tasks, and study material across tools.",
+  },
+];
+
+const PROJECTS = [
+  {
+    tag: "College",
+    title: "Student Records — C",
+    description: "A console program to add and search student entries using arrays and functions.",
+    image: projectCRecords,
+  },
+  {
+    tag: "Personal",
+    title: "Personal Portfolio Website",
+    description: "This site — a responsive one-page portfolio introducing who I am and what I'm learning.",
+    image: projectPortfolio,
+  },
+  {
+    tag: "Personal",
+    title: "Study Notes Hub",
+    description: "A simple HTML/CSS page to keep my semester notes and to-dos in one place.",
+    image: projectNotes,
+  },
+];
