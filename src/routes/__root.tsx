@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -106,11 +107,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
-    scripts: [
-      // Botpress Webchat loader + bot config — renders the chat bubble on every page.
-      { src: "https://cdn.botpress.cloud/webchat/v5.0/inject.js" },
-      { src: "https://files.bpcontent.cloud/2026/10/13/14/20261013144022-RV6VBSUJ.js", defer: true },
-    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -132,8 +128,26 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+// Botpress Webchat: load once in the browser, config only after inject.js is ready.
+function useBotpress() {
+  useEffect(() => {
+    if (document.getElementById("bp-inject")) return;
+    const inject = document.createElement("script");
+    inject.id = "bp-inject";
+    inject.src = "https://cdn.botpress.cloud/webchat/v5.0/inject.js";
+    inject.onload = () => {
+      const cfg = document.createElement("script");
+      cfg.id = "bp-config";
+      cfg.src = "https://files.bpcontent.cloud/2026/10/13/14/20261013144022-RV6VBSUJ.js";
+      document.body.appendChild(cfg);
+    };
+    document.body.appendChild(inject);
+  }, []);
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useBotpress();
 
   return (
     <QueryClientProvider client={queryClient}>
