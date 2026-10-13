@@ -109,8 +109,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       // Botpress Webchat loader — renders the chat bubble on every page.
       { src: "https://cdn.botpress.cloud/webchat/v3.3/inject.js", defer: true },
-      // Bot-specific config (contains the bot ID). Provided by Botpress Studio.
-      { src: "https://files.bpcontent.cloud/2026/10/13/00/botpress-config.js", defer: true },
     ],
   }),
   shellComponent: RootShell,
